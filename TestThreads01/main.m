@@ -24,7 +24,7 @@ int main(int argc, const char * argv[]) {
         
         NSLog(@"Start");
         
-        performSerialTask(taskCount, counterLimit);
+//        performSerialTask(taskCount, counterLimit);
         performConcurentInvocationOperationTask(taskCount, counterLimit);
         performConcurentBlocksTask(taskCount, counterLimit);
         performOperationArrayTask(taskCount, counterLimit);
@@ -65,17 +65,11 @@ void performConcurentInvocationOperationTask(int taskCount, int counterLimit) {
     JFFTask *task01 = [[JFFTask alloc] init];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    //  concurent tasks
     for (NSInteger i = 0; i < taskCount; i++) {
         NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc] initWithTarget:task01 selector:@selector(counterTo:) object:@(counterLimit)];
         [queue addOperation:invocationOperation];
     }
-    
-    //  wait queue
-    BOOL queueInProgress = YES;
-    while (queueInProgress) {
-        queueInProgress = (queue.operationCount > 0);
-    }
+    [queue waitUntilAllOperationsAreFinished];
     
     [globalConcurentTimeCounter stopAndPrint];
 }
@@ -87,19 +81,13 @@ void performConcurentBlocksTask(int taskCount, int counterLimit) {
     JFFTask *task01 = [[JFFTask alloc] init];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    //  concurent tasks
     for (NSInteger i = 0; i < taskCount; i++) {
         
         [queue addOperationWithBlock:^{
             [task01 counterTo:@(counterLimit)];
         }];
     }
-    
-    //  wait queue
-    BOOL queueInProgress = YES;
-    while (queueInProgress) {
-        queueInProgress = (queue.operationCount > 0);
-    }
+    [queue waitUntilAllOperationsAreFinished];
     
     [globalConcurentTimeCounter stopAndPrint];
 }
@@ -110,13 +98,12 @@ void performOperationArrayTask(int taskCount, int counterLimit) {
     JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Councurent Operation Array Counter"];
     JFFTask *task01 = [[JFFTask alloc] init];
     
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    //  operation array
     NSMutableArray *operationArray = [NSMutableArray array];
     for (NSInteger i = 0; i < taskCount; i++) {
         NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc] initWithTarget:task01 selector:@selector(counterTo:) object:@(counterLimit)];
         [operationArray addObject:invocationOperation];
     }
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue addOperations:operationArray waitUntilFinished:YES];
     
     [globalConcurentTimeCounter stopAndPrint];
