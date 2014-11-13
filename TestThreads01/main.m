@@ -10,6 +10,8 @@
 
 #import "JFFTask.h"
 #import "JFFTimeCounter.h"
+#import "JFFConcurentTaskPerformer.h"
+#import "JFFBlockOperationTest.h"
 
 void performSerialTask(int taskCount, int counterLimit);
 void performConcurentInvocationOperationTask(int taskCount, int counterLimit);
@@ -23,11 +25,24 @@ int main(int argc, const char * argv[]) {
         const int counterLimit = 10000000;
         
         NSLog(@"Start");
+        NSLog(@"Task parameters. taskCount - %i, counterLimit - %i", taskCount, counterLimit);
         
-//        performSerialTask(taskCount, counterLimit);
+#ifdef DEBUG
+        NSLog(@"Debug mode");
+#else
+        NSLog(@"Release mode");
+#endif
+        
+        performSerialTask(taskCount, counterLimit);
         performConcurentInvocationOperationTask(taskCount, counterLimit);
         performConcurentBlocksTask(taskCount, counterLimit);
         performOperationArrayTask(taskCount, counterLimit);
+        
+        JFFConcurentTaskPerformer *concurentTaskPerformer = [[JFFConcurentTaskPerformer alloc] init];
+        [concurentTaskPerformer performTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
+        
+        JFFBlockOperationTest *blockOperationTest = [[JFFBlockOperationTest alloc] init];
+        [blockOperationTest performTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
         
         NSLog(@"Finish");
     }
@@ -61,7 +76,7 @@ void performSerialTask(int taskCount, int counterLimit) {
 
 
 void performConcurentInvocationOperationTask(int taskCount, int counterLimit) {
-    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Councurent InvocationOperation Counter"];
+    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurent InvocationOperation Counter"];
     JFFTask *task01 = [[JFFTask alloc] init];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -77,7 +92,7 @@ void performConcurentInvocationOperationTask(int taskCount, int counterLimit) {
 
 
 void performConcurentBlocksTask(int taskCount, int counterLimit) {
-    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Councurent Blocks Counter"];
+    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurent Blocks Counter"];
     JFFTask *task01 = [[JFFTask alloc] init];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -94,8 +109,9 @@ void performConcurentBlocksTask(int taskCount, int counterLimit) {
 
 
 
+
 void performOperationArrayTask(int taskCount, int counterLimit) {
-    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Councurent Operation Array Counter"];
+    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurent Operation Array Counter"];
     JFFTask *task01 = [[JFFTask alloc] init];
     
     NSMutableArray *operationArray = [NSMutableArray array];

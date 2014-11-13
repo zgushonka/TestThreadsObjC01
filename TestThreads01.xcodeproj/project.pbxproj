@@ -10,6 +10,8 @@
 		848F97511A12A90E00C2C766 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F97501A12A90E00C2C766 /* main.m */; };
 		848F97591A12A97500C2C766 /* JFFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F97581A12A97500C2C766 /* JFFTask.m */; };
 		848F975C1A12AB0C00C2C766 /* JFFTimeCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F975B1A12AB0C00C2C766 /* JFFTimeCounter.m */; };
+		E352F2771A13BA5200733DF0 /* JFFConcurentTaskPerformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E352F2761A13BA5200733DF0 /* JFFConcurentTaskPerformer.m */; };
+		E352F27A1A14BC3D00733DF0 /* JFFBlockOperationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E352F2791A14BC3D00733DF0 /* JFFBlockOperationTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +33,10 @@
 		848F97581A12A97500C2C766 /* JFFTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTask.m; sourceTree = "<group>"; };
 		848F975A1A12AB0C00C2C766 /* JFFTimeCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTimeCounter.h; sourceTree = "<group>"; };
 		848F975B1A12AB0C00C2C766 /* JFFTimeCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTimeCounter.m; sourceTree = "<group>"; };
+		E352F2751A13BA5200733DF0 /* JFFConcurentTaskPerformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFConcurentTaskPerformer.h; sourceTree = "<group>"; };
+		E352F2761A13BA5200733DF0 /* JFFConcurentTaskPerformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFConcurentTaskPerformer.m; sourceTree = "<group>"; };
+		E352F2781A14BC3D00733DF0 /* JFFBlockOperationTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFBlockOperationTest.h; sourceTree = "<group>"; };
+		E352F2791A14BC3D00733DF0 /* JFFBlockOperationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFBlockOperationTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,10 @@
 			isa = PBXGroup;
 			children = (
 				848F97501A12A90E00C2C766 /* main.m */,
+				E352F2751A13BA5200733DF0 /* JFFConcurentTaskPerformer.h */,
+				E352F2761A13BA5200733DF0 /* JFFConcurentTaskPerformer.m */,
+				E352F2781A14BC3D00733DF0 /* JFFBlockOperationTest.h */,
+				E352F2791A14BC3D00733DF0 /* JFFBlockOperationTest.m */,
 				848F97571A12A97500C2C766 /* JFFTask.h */,
 				848F97581A12A97500C2C766 /* JFFTask.m */,
 				848F975A1A12AB0C00C2C766 /* JFFTimeCounter.h */,
@@ -130,6 +140,8 @@
 			files = (
 				848F97511A12A90E00C2C766 /* main.m in Sources */,
 				848F97591A12A97500C2C766 /* JFFTask.m in Sources */,
+				E352F27A1A14BC3D00733DF0 /* JFFBlockOperationTest.m in Sources */,
+				E352F2771A13BA5200733DF0 /* JFFConcurentTaskPerformer.m in Sources */,
 				848F975C1A12AB0C00C2C766 /* JFFTimeCounter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,6 +256,7 @@
 				848F97561A12A90E00C2C766 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

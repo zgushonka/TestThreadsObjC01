@@ -18,7 +18,7 @@
     while (counter < finalNumber.integerValue) {
         counter++;
         
-//        test += (counter * (-1^(counter%3)) );
+//        test += sin(counter * (-1^(counter%3)) );
     }
     
 //    NSLog(@"%f", test);
