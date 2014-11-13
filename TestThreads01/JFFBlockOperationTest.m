@@ -11,45 +11,30 @@
 #import "JFFTask.h"
 #import "JFFTimeCounter.h"
 
-@interface JFFBlockOperationTest()
-@property NSBlockOperation *blockOperation;
-@end
-
 @implementation JFFBlockOperationTest
 
 - (void)performTask:(id)task times:(int)taskCount counterLimit:(int)counterLimit {
-    
     JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurent Block Operation Counter"];
     
-    self.blockOperation = nil;
+    void (^taskBlock)(void) = ^{
+        JFFTask *jffTask = (JFFTask *)task;
+        [jffTask counterTo:@(counterLimit)];
+    };
     
+    NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{}];
     for (int i = 0; i < taskCount; i++) {
-        
-        void (^taskBlock)(void) = ^{
-            JFFTask *jffTask = (JFFTask *)task;
-            [jffTask counterTo:@(counterLimit)];
-        };
-        
-        if (!self.blockOperation) {
-            self.blockOperation = [NSBlockOperation blockOperationWithBlock:taskBlock];
-            
-            __weak JFFBlockOperationTest *weakSelf = self;
-            [self.blockOperation setCompletionBlock:^{
-                weakSelf.complete = YES;
-            }];
-        } else {
-            [self.blockOperation addExecutionBlock:taskBlock];
-        }
+        [blockOperation addExecutionBlock:taskBlock];
     }
     
-    [self.blockOperation start];
+    __weak JFFBlockOperationTest *weakSelf = self;
+    [blockOperation setCompletionBlock:^{
+        weakSelf.complete = YES;
+    }];
     
-    while (!self.complete) {
-        //  wait
-    }
+    [blockOperation start];
+    [blockOperation waitUntilFinished];
     
     [globalConcurentTimeCounter stopAndPrint];
-    
 }
 
 @end

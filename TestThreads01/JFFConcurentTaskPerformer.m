@@ -34,11 +34,11 @@
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue addOperations:operationArray waitUntilFinished:NO];
     [queue addObserver:self forKeyPath:@"operations" options:0 context:(__bridge void *)(globalConcurentTimeCounter)];
+    [queue waitUntilAllOperationsAreFinished];
     
     while (!self.complete) {
-
+        //  wait callback function
     }
-    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -57,3 +57,5 @@
 }
 
 @end
+
+
