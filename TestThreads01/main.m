@@ -21,8 +21,8 @@ void performOperationArrayTask(int taskCount, int counterLimit);
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
-        const int taskCount = 100;
-        const int counterLimit = 10000000;
+        const int taskCount = 1000;
+        const int counterLimit = 100000;
         
         NSLog(@"Start");
         NSLog(@"Task parameters. taskCount - %i, counterLimit - %i", taskCount, counterLimit);
