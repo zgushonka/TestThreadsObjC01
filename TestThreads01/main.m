@@ -10,12 +10,12 @@
 
 #import "JFFTask.h"
 #import "JFFTimeCounter.h"
-#import "JFFConcurentTaskPerformer.h"
+#import "JFFConcurrentTaskPerformer.h"
 #import "JFFBlockOperationTest.h"
 
 void performSerialTask(int taskCount, int counterLimit);
-void performConcurentInvocationOperationTask(int taskCount, int counterLimit);
-void performConcurentBlocksTask(int taskCount, int counterLimit);
+void performConcurrentInvocationOperationTask(int taskCount, int counterLimit);
+void performConcurrentBlocksTask(int taskCount, int counterLimit);
 void performOperationArrayTask(int taskCount, int counterLimit);
 
 int main(int argc, const char * argv[]) {
@@ -34,12 +34,12 @@ int main(int argc, const char * argv[]) {
 #endif
         
         performSerialTask(taskCount, counterLimit);
-        performConcurentInvocationOperationTask(taskCount, counterLimit);
-        performConcurentBlocksTask(taskCount, counterLimit);
+        performConcurrentInvocationOperationTask(taskCount, counterLimit);
+        performConcurrentBlocksTask(taskCount, counterLimit);
         performOperationArrayTask(taskCount, counterLimit);
         
-        JFFConcurentTaskPerformer *concurentTaskPerformer = [[JFFConcurentTaskPerformer alloc] init];
-        [concurentTaskPerformer performTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
+        JFFConcurrentTaskPerformer *concurrentTaskPerformer = [[JFFConcurrentTaskPerformer alloc] init];
+        [concurrentTaskPerformer performTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
         
         JFFBlockOperationTest *blockOperationTest = [[JFFBlockOperationTest alloc] init];
         [blockOperationTest performTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
@@ -75,8 +75,8 @@ void performSerialTask(int taskCount, int counterLimit) {
 
 
 
-void performConcurentInvocationOperationTask(int taskCount, int counterLimit) {
-    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurent InvocationOperation Counter"];
+void performConcurrentInvocationOperationTask(int taskCount, int counterLimit) {
+    JFFTimeCounter *globalConcurrentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurrent InvocationOperation Counter"];
     JFFTask *task01 = [[JFFTask alloc] init];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -86,13 +86,13 @@ void performConcurentInvocationOperationTask(int taskCount, int counterLimit) {
     }
     [queue waitUntilAllOperationsAreFinished];
     
-    [globalConcurentTimeCounter stopAndPrint];
+    [globalConcurrentTimeCounter stopAndPrint];
 }
 
 
 
-void performConcurentBlocksTask(int taskCount, int counterLimit) {
-    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurent Blocks Counter"];
+void performConcurrentBlocksTask(int taskCount, int counterLimit) {
+    JFFTimeCounter *globalConcurrentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurrent Blocks Counter"];
     JFFTask *task01 = [[JFFTask alloc] init];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -104,14 +104,14 @@ void performConcurentBlocksTask(int taskCount, int counterLimit) {
     }
     [queue waitUntilAllOperationsAreFinished];
     
-    [globalConcurentTimeCounter stopAndPrint];
+    [globalConcurrentTimeCounter stopAndPrint];
 }
 
 
 
 
 void performOperationArrayTask(int taskCount, int counterLimit) {
-    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurent Operation Array Counter"];
+    JFFTimeCounter *globalConcurrentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurrent Operation Array Counter"];
     JFFTask *task01 = [[JFFTask alloc] init];
     
     NSMutableArray *operationArray = [NSMutableArray array];
@@ -122,7 +122,7 @@ void performOperationArrayTask(int taskCount, int counterLimit) {
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue addOperations:operationArray waitUntilFinished:YES];
     
-    [globalConcurentTimeCounter stopAndPrint];
+    [globalConcurrentTimeCounter stopAndPrint];
 }
 
 

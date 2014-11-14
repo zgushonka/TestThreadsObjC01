@@ -1,5 +1,5 @@
 //
-//  JFFConcurentTaskPerformer.h
+//  JFFConcurrentTaskPerformer.h
 //  TestThreads01
 //
 //  Created by oleksandr.buravlyov on 11/12/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JFFConcurentTaskPerformer : NSObject
+@interface JFFConcurrentTaskPerformer : NSObject
 
 - (void)performTask:(id)task times:(int)taskCount counterLimit:(int)counterLimit;
 

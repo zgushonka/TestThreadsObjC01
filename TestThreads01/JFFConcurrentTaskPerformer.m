@@ -1,30 +1,30 @@
 //
-//  JFFConcurentTaskPerformer.m
+//  JFFConcurrentTaskPerformer.m
 //  TestThreads01
 //
 //  Created by oleksandr.buravlyov on 11/12/14.
 //  Copyright (c) 2014 home ltd. All rights reserved.
 //
 
-#import "JFFConcurentTaskPerformer.h"
+#import "JFFConcurrentTaskPerformer.h"
 
 #import "JFFTask.h"
 #import "JFFTimeCounter.h"
 
 
-@interface JFFConcurentTaskPerformer ()
+@interface JFFConcurrentTaskPerformer ()
 
 @property BOOL complete;
 
 @end
 
-@implementation JFFConcurentTaskPerformer
+@implementation JFFConcurrentTaskPerformer
 
 - (void)performTask:(id)task times:(int)taskCount counterLimit:(int)counterLimit {
     
     self.complete = NO;
     
-    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurent Operation Array With Callback Counter"];
+    JFFTimeCounter *globalConcurrentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurrent Operation Array With Callback Counter"];
     
     NSMutableArray *operationArray = [NSMutableArray array];
     for (NSInteger i = 0; i < taskCount; i++) {
@@ -33,7 +33,7 @@
     }
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue addOperations:operationArray waitUntilFinished:NO];
-    [queue addObserver:self forKeyPath:@"operations" options:0 context:(__bridge void *)(globalConcurentTimeCounter)];
+    [queue addObserver:self forKeyPath:@"operations" options:0 context:(__bridge void *)(globalConcurrentTimeCounter)];
     [queue waitUntilAllOperationsAreFinished];
     
     while (!self.complete) {
@@ -45,8 +45,8 @@
     if ([keyPath isEqualToString:@"operations"]) {
         NSOperationQueue *queue = (NSOperationQueue *)object;
         if ([queue.operations count] == 0) {
-            JFFTimeCounter *globalConcurentTimeCounter = (__bridge JFFTimeCounter *)context;
-            [globalConcurentTimeCounter stopAndPrint];
+            JFFTimeCounter *globalConcurrentTimeCounter = (__bridge JFFTimeCounter *)context;
+            [globalConcurrentTimeCounter stopAndPrint];
             self.complete = YES;
         }
     }

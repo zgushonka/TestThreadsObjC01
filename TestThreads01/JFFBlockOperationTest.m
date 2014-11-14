@@ -14,7 +14,7 @@
 @implementation JFFBlockOperationTest
 
 - (void)performTask:(id)task times:(int)taskCount counterLimit:(int)counterLimit {
-    JFFTimeCounter *globalConcurentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurent Block Operation Counter"];
+    JFFTimeCounter *globalConcurrentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurrent Block Operation Counter"];
     
     void (^taskBlock)(void) = ^{
         JFFTask *jffTask = (JFFTask *)task;
@@ -34,7 +34,7 @@
     [blockOperation start];
     [blockOperation waitUntilFinished];
     
-    [globalConcurentTimeCounter stopAndPrint];
+    [globalConcurrentTimeCounter stopAndPrint];
 }
 
 @end
