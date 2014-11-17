@@ -10,6 +10,7 @@
 		848F97511A12A90E00C2C766 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F97501A12A90E00C2C766 /* main.m */; };
 		848F97591A12A97500C2C766 /* JFFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F97581A12A97500C2C766 /* JFFTask.m */; };
 		848F975C1A12AB0C00C2C766 /* JFFTimeCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 848F975B1A12AB0C00C2C766 /* JFFTimeCounter.m */; };
+		E33B04001A1A4CD80019CA81 /* JFFDispatchQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E33B03FF1A1A4CD80019CA81 /* JFFDispatchQueueTest.m */; };
 		E352F2771A13BA5200733DF0 /* JFFConcurrentTaskPerformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E352F2761A13BA5200733DF0 /* JFFConcurrentTaskPerformer.m */; };
 		E352F27A1A14BC3D00733DF0 /* JFFBlockOperationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E352F2791A14BC3D00733DF0 /* JFFBlockOperationTest.m */; };
 /* End PBXBuildFile section */
@@ -33,6 +34,8 @@
 		848F97581A12A97500C2C766 /* JFFTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTask.m; sourceTree = "<group>"; };
 		848F975A1A12AB0C00C2C766 /* JFFTimeCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFTimeCounter.h; sourceTree = "<group>"; };
 		848F975B1A12AB0C00C2C766 /* JFFTimeCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFTimeCounter.m; sourceTree = "<group>"; };
+		E33B03FE1A1A4CD80019CA81 /* JFFDispatchQueueTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFDispatchQueueTest.h; sourceTree = "<group>"; };
+		E33B03FF1A1A4CD80019CA81 /* JFFDispatchQueueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFDispatchQueueTest.m; sourceTree = "<group>"; };
 		E352F2751A13BA5200733DF0 /* JFFConcurrentTaskPerformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFConcurrentTaskPerformer.h; sourceTree = "<group>"; };
 		E352F2761A13BA5200733DF0 /* JFFConcurrentTaskPerformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFFConcurrentTaskPerformer.m; sourceTree = "<group>"; };
 		E352F2781A14BC3D00733DF0 /* JFFBlockOperationTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFBlockOperationTest.h; sourceTree = "<group>"; };
@@ -74,6 +77,8 @@
 				E352F2761A13BA5200733DF0 /* JFFConcurrentTaskPerformer.m */,
 				E352F2781A14BC3D00733DF0 /* JFFBlockOperationTest.h */,
 				E352F2791A14BC3D00733DF0 /* JFFBlockOperationTest.m */,
+				E33B03FE1A1A4CD80019CA81 /* JFFDispatchQueueTest.h */,
+				E33B03FF1A1A4CD80019CA81 /* JFFDispatchQueueTest.m */,
 				848F97571A12A97500C2C766 /* JFFTask.h */,
 				848F97581A12A97500C2C766 /* JFFTask.m */,
 				848F975A1A12AB0C00C2C766 /* JFFTimeCounter.h */,
@@ -140,6 +145,7 @@
 			files = (
 				848F97511A12A90E00C2C766 /* main.m in Sources */,
 				848F97591A12A97500C2C766 /* JFFTask.m in Sources */,
+				E33B04001A1A4CD80019CA81 /* JFFDispatchQueueTest.m in Sources */,
 				E352F27A1A14BC3D00733DF0 /* JFFBlockOperationTest.m in Sources */,
 				E352F2771A13BA5200733DF0 /* JFFConcurrentTaskPerformer.m in Sources */,
 				848F975C1A12AB0C00C2C766 /* JFFTimeCounter.m in Sources */,

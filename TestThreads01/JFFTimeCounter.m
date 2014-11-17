@@ -31,6 +31,7 @@
 - (instancetype)initWithName:(NSString *)counterName {
     if (self.init) {
         self.name = counterName;
+        NSLog(@"start counter with name %@", counterName);
     }
     return self;
 }
