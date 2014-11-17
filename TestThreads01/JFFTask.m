@@ -10,7 +10,7 @@
 
 @implementation JFFTask
 
-- (double)counterTo:(NSNumber *)finalNumber {
+- (double)countWithWhileTo:(NSNumber *)finalNumber {
     NSInteger counter = 0;
     
     double test = 0.0;
@@ -22,6 +22,18 @@
     }
     
 //    NSLog(@"%f", test);
+    return test;
+}
+
+
+- (double)countWithForTo:(NSNumber *)finalNumber {
+    double test = 0.0;
+    
+    for (int i=0; i < finalNumber.integerValue; i++) {
+        test = sin(sin(i * (-1^(i%3)) ));
+    }
+    
+    //    NSLog(@"%f", test);
     return test;
 }
 

@@ -18,7 +18,7 @@
     
     void (^taskBlock)(void) = ^{
         JFFTask *jffTask = (JFFTask *)task;
-        [jffTask counterTo:@(counterLimit)];
+        [jffTask countWithWhileTo:@(counterLimit)];
     };
     
     NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{}];

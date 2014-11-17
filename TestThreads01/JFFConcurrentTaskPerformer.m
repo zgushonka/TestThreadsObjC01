@@ -28,7 +28,7 @@
     
     NSMutableArray *operationArray = [NSMutableArray array];
     for (NSInteger i = 0; i < taskCount; i++) {
-        NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc] initWithTarget:task selector:@selector(counterTo:) object:@(counterLimit)];
+        NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc] initWithTarget:task selector:@selector(countWithWhileTo:) object:@(counterLimit)];
         [operationArray addObject:invocationOperation];
     }
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];

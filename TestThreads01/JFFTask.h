@@ -10,6 +10,7 @@
 
 @interface JFFTask : NSObject
 
-- (double)counterTo:(NSNumber *)finalNumber;
+- (double)countWithWhileTo:(NSNumber *)finalNumber;
+- (double)countWithForTo:(NSNumber *)finalNumber;
 
 @end

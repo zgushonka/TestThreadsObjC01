@@ -62,7 +62,7 @@ void performSerialTask(int taskCount, int counterLimit) {
     for (NSInteger i = 0; i < taskCount; i++) {
 //        NSLog(@"start %li tast of %i", i, taskCount);
         JFFTimeCounter *localSerialCounter = [[JFFTimeCounter alloc] initWithName:@"Local Serial Counter"];
-        [task01 counterTo:@(counterLimit)];
+        [task01 countWithWhileTo:@(counterLimit)];
         averageTaskTime += [localSerialCounter getTimeIntervaStartToNow];
 //        [localSerialCounter stopAndPrint];
     }
@@ -81,7 +81,7 @@ void performConcurrentInvocationOperationTask(int taskCount, int counterLimit) {
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     for (NSInteger i = 0; i < taskCount; i++) {
-        NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc] initWithTarget:task01 selector:@selector(counterTo:) object:@(counterLimit)];
+        NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc] initWithTarget:task01 selector:@selector(countWithWhileTo:) object:@(counterLimit)];
         [queue addOperation:invocationOperation];
     }
     [queue waitUntilAllOperationsAreFinished];
@@ -99,7 +99,7 @@ void performConcurrentBlocksTask(int taskCount, int counterLimit) {
     for (NSInteger i = 0; i < taskCount; i++) {
         
         [queue addOperationWithBlock:^{
-            [task01 counterTo:@(counterLimit)];
+            [task01 countWithWhileTo:@(counterLimit)];
         }];
     }
     [queue waitUntilAllOperationsAreFinished];
@@ -109,14 +109,13 @@ void performConcurrentBlocksTask(int taskCount, int counterLimit) {
 
 
 
-
 void performOperationArrayTask(int taskCount, int counterLimit) {
     JFFTimeCounter *globalConcurrentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurrent Operation Array Counter"];
     JFFTask *task01 = [[JFFTask alloc] init];
     
     NSMutableArray *operationArray = [NSMutableArray array];
     for (NSInteger i = 0; i < taskCount; i++) {
-        NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc] initWithTarget:task01 selector:@selector(counterTo:) object:@(counterLimit)];
+        NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc] initWithTarget:task01 selector:@selector(countWithWhileTo:) object:@(counterLimit)];
         [operationArray addObject:invocationOperation];
     }
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
