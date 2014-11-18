@@ -22,50 +22,61 @@
 @implementation JFFDispatchQueueTest
 
 - (void)performCalcInSerialQueueWithTask:(id)task times:(int)taskCount counterLimit:(int)counterLimit {
-    JFFTimeCounter *timeCounter = [[JFFTimeCounter alloc] initWithName:@"Serial Queue Counter"];
     self.complete = NO;
     
-    dispatch_queue_t serialQueue = dispatch_queue_create("my serial queue", NULL);
-    JFFTask *myTask = (JFFTask *)task;
-    for (int i = 0; i < taskCount; i++) {
+    @autoreleasepool {
+        JFFTimeCounter *timeCounter = [[JFFTimeCounter alloc] initWithName:@"Serial Queue Counter"];
+        dispatch_queue_t serialQueue = dispatch_queue_create("my.serial.queue", NULL);
+        if (!serialQueue) {
+            NSLog(@"Error: serial Queue creation error");
+            return;     //  !!! error exit point
+        }
         
-        __block JFFTimeCounter *blockTimeCounter = timeCounter;
-        dispatch_async(serialQueue, ^{
-            [myTask countWithWhileTo:@(counterLimit)];
-            
-            if (i == taskCount) {
-                [blockTimeCounter stopAndPrint];
-            }
-            
-        });
+        [self placeTask:task asyncToQueue:serialQueue times:taskCount counterLimit:counterLimit];
+        
+        while (!self.complete) {
+            //  wait
+        }
+        [timeCounter stopAndPrint];
     }
-    
-    [self performSelector:@selector(setCompleteFlag) withObject:nil afterDelay:10];
-    
-    
-    while (!self.complete) {
-        //  wait
-    }
-    
-    [timeCounter stopAndPrint];
-    
 }
 
 - (void)performCalcInGloballQueueWithTask:(id)task times:(int)taskCount counterLimit:(int)counterLimit {
-    JFFTimeCounter *timeCounter = [[JFFTimeCounter alloc] initWithName:@"Global concurrent Queue Counter"];
-    dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    [self placeTask:task asyncToQueue:globalQueue times:taskCount counterLimit:counterLimit];
-    [timeCounter stopAndPrint];
+    self.complete = NO;
+    
+    @autoreleasepool {
+        JFFTimeCounter *timeCounter = [[JFFTimeCounter alloc] initWithName:@"GlobalQueue concurrent Counter"];
+        dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        if (!globalQueue) {
+            NSLog(@"Error: global Queue creation error");
+            return;     //  !!! error exit point
+        }
+        
+        [self placeTask:task asyncToQueue:globalQueue times:taskCount counterLimit:counterLimit];
+        
+        while (!self.complete) {
+            //  wait
+        }
+        [timeCounter stopAndPrint];
+    }
 }
 
 
 - (void)placeTask:(id)task asyncToQueue:(dispatch_queue_t)queue times:(int)taskCount counterLimit:(int)counterLimit {
     JFFTask *myTask = (JFFTask *)task;
     for (int i = 0; i < taskCount; i++) {
-        
-        dispatch_async(queue, ^{
-            [myTask countWithWhileTo:@(counterLimit)];
-        });
+        __weak id weakSelf = self;
+        @autoreleasepool {
+            dispatch_async(queue, ^{
+                [myTask countWithWhileTo:@(counterLimit)];
+                
+                //  Completion Task
+                if (i == taskCount-1) {
+                    [weakSelf performSelectorInBackground:@selector(setCompleteFlag) withObject:nil];
+                }
+                
+            });
+        }
     }
 }
 
