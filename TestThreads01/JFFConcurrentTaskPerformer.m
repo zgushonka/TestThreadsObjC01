@@ -13,23 +13,21 @@
 
 
 @interface JFFConcurrentTaskPerformer ()
-
 @property BOOL complete;
-
 @end
+
 
 @implementation JFFConcurrentTaskPerformer
 
 - (void)performTask:(id)task times:(int)taskCount counterLimit:(int)counterLimit {
-    
     self.complete = NO;
-    
-    JFFTimeCounter *globalConcurrentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Global Concurrent Operation Array With Callback Counter"];
+    JFFTimeCounter *globalConcurrentTimeCounter = [[JFFTimeCounter alloc] initWithName:@"Concurrent Operation Array With Callback Counter"];
     
     NSMutableArray *operationArray = [NSMutableArray array];
     for (NSInteger i = 0; i < taskCount; i++) {
         NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc] initWithTarget:task selector:@selector(countWithWhileTo:) object:@(counterLimit)];
         [operationArray addObject:invocationOperation];
+        
     }
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue addOperations:operationArray waitUntilFinished:NO];

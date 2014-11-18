@@ -34,20 +34,20 @@ int main(int argc, const char * argv[]) {
         NSLog(@"Release mode");
 #endif
         
-        performSerialTask(taskCount, counterLimit);
-        performConcurrentInvocationOperationTask(taskCount, counterLimit);
-        performConcurrentBlocksTask(taskCount, counterLimit);
-        performOperationArrayTask(taskCount, counterLimit);
+//        performSerialTask(taskCount, counterLimit);
+//        performConcurrentInvocationOperationTask(taskCount, counterLimit);
+//        performConcurrentBlocksTask(taskCount, counterLimit);
+//        performOperationArrayTask(taskCount, counterLimit);
         
         JFFConcurrentTaskPerformer *concurrentTaskPerformer = [[JFFConcurrentTaskPerformer alloc] init];
         [concurrentTaskPerformer performTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
         
-        JFFBlockOperationTest *blockOperationTest = [[JFFBlockOperationTest alloc] init];
-        [blockOperationTest performTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
+//        JFFBlockOperationTest *blockOperationTest = [[JFFBlockOperationTest alloc] init];
+//        [blockOperationTest performTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
         
         JFFDispatchQueueTest *myDispatchQueueTest = [[JFFDispatchQueueTest alloc] init];
-        [myDispatchQueueTest performCalcInSerialQueueWithTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
-        [myDispatchQueueTest performCalcInGloballQueueWithTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];        
+//        [myDispatchQueueTest performCalcInSerialQueueWithTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
+        [myDispatchQueueTest performCalcInGloballQueueWithTask:[[JFFTask alloc] init] times:taskCount counterLimit:counterLimit];
         
         NSLog(@"Finish");
     }

@@ -64,9 +64,9 @@
 
 - (void)placeTask:(id)task asyncToQueue:(dispatch_queue_t)queue times:(int)taskCount counterLimit:(int)counterLimit {
     JFFTask *myTask = (JFFTask *)task;
-    for (int i = 0; i < taskCount; i++) {
-        __weak id weakSelf = self;
-        @autoreleasepool {
+    @autoreleasepool {
+        for (int i = 0; i < taskCount; i++) {
+            __weak id weakSelf = self;
             dispatch_async(queue, ^{
                 [myTask countWithWhileTo:@(counterLimit)];
                 
