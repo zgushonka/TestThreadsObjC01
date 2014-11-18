@@ -13,9 +13,7 @@
 
 
 @interface JFFDispatchQueueTest ()
-
 @property BOOL complete;
-
 @end
 
 
